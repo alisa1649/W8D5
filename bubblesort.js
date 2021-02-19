@@ -12,4 +12,32 @@ function askIfGreaterThan(el1, el2, callback) {
     });
 }
 
-askIfGreaterThan(1, 17, function (a) { console.log(a); });
+
+
+function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
+    if (i < arr.length - 1) {
+        askIfGreaterThan(arr[i], arr[i + 1], function (isGreaterThan) {
+            if (isGreaterThan){
+                let larger = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = larger;
+                madeAnySwaps = true;
+            }
+            innerBubbleSortLoop(arr, i+1, madeAnySwaps, outerBubbleSortLoop);
+        });
+    }
+    else {
+        outerBubbleSortLoop(true);
+    }
+}
+
+
+
+// askIfGreaterThan(1, 17, function (a) { console.log(a); });
+let a = [2, 4, 5, 6, 90, 4, 2, 1];
+innerBubbleSortLoop(a, 0, false, function () { 
+    console.log("Outer"); 
+    reader.close(); 
+    console.log(a);
+});
+

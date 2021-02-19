@@ -16,7 +16,7 @@ function addNumbers(sum, numsLeft,completionCallback ){
 }
 
 
-addNumbers(2, 5, function(sum){
-    console.log(`${sum}`);
-    reader.close();
-});
+// addNumbers(2, 5, function(sum){
+//     console.log(`${sum}`);
+//     reader.close();
+// });
