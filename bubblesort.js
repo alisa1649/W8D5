@@ -17,27 +17,42 @@ function askIfGreaterThan(el1, el2, callback) {
 function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
     if (i < arr.length - 1) {
         askIfGreaterThan(arr[i], arr[i + 1], function (isGreaterThan) {
-            if (isGreaterThan){
+            if (isGreaterThan) {
                 let larger = arr[i];
-                arr[i] = arr[i+1];
-                arr[i+1] = larger;
+                arr[i] = arr[i + 1];
+                arr[i + 1] = larger;
                 madeAnySwaps = true;
             }
-            innerBubbleSortLoop(arr, i+1, madeAnySwaps, outerBubbleSortLoop);
+            innerBubbleSortLoop(arr, i + 1, madeAnySwaps, outerBubbleSortLoop);
         });
     }
     else {
-        outerBubbleSortLoop(true);
+        outerBubbleSortLoop(madeAnySwaps);
     }
 }
 
 
 
 // askIfGreaterThan(1, 17, function (a) { console.log(a); });
-let a = [2, 4, 5, 6, 90, 4, 2, 1];
-innerBubbleSortLoop(a, 0, false, function () { 
-    console.log("Outer"); 
-    reader.close(); 
-    console.log(a);
-});
+// let a = [2, 4, 5, 6, 90, 4, 2, 1];
+// innerBubbleSortLoop(a, 0, false, function () {
+//     console.log("Outer");
+//     reader.close();
+//     console.log(a);
+// });
 
+function absurdBubbleSort(arr, sortCompletionCallBack) {
+    function outerBubbleSortLoop(madeAnySwaps) {
+        if (madeAnySwaps) {
+            innerBubbleSortLoop(arr, 0, false, outerBubbleSortLoop);
+        }
+        else {
+            sortCompletionCallBack(arr);
+        }
+    }
+    outerBubbleSortLoop(true);
+}
+absurdBubbleSort([3, 2, 1], function (arr) {
+    console.log("Sorted array: " + JSON.stringify(arr));
+    reader.close();
+});
